@@ -1,8 +1,12 @@
 {
   "tasks": {
-    "dev": "deno run --watch main.ts"
+    "dev": "deno run --watch main.ts",
+    "generate": "deno run --allow-read --allow-write scripts/generate_qr_codes.ts"
   },
   "imports": {
-    "@std/assert": "jsr:@std/assert@1"
+    "@libs/qrcode": "jsr:@libs/qrcode@^2.0.0",
+    "@std/assert": "jsr:@std/assert@1",
+    "@std/fs": "jsr:@std/fs@^1.0.4",
+    "@std/path": "jsr:@std/path@^1.0.6"
   }
 }
