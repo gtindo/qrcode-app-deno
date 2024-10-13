@@ -1,6 +1,7 @@
 import type { Database } from "@db/sqlite";
 import type { ApiKey } from "../database/types.ts";
 import { DbClient } from "../database/client.ts";
+import { toApiKey } from "../database/fmt.ts";
 
 class ApiKeyService {
   constructor(private db: Database) {}
@@ -15,7 +16,7 @@ class ApiKeyService {
 
     if (rows.length === 0) return undefined;
 
-    return this.toApiKey(rows[0]);
+    return toApiKey(rows[0]);
   }
 
   incrementApiKeyUsage(id: number) {
@@ -26,20 +27,6 @@ class ApiKeyService {
     `);
 
     statement.run(id);
-  }
-
-  private toApiKey(row: Record<string, unknown>): ApiKey {
-    return {
-      id: row.id as number,
-      name: row.name as string,
-      value: row.value as string,
-      maxUsage: row.max_usage === null ? undefined : row.max_usage as number,
-      currentUsage: row.current_usage as number,
-      isActive: (row.is_active as number) === 1,
-      createdAt: new Date(row.created_at as string),
-      updatedAt: new Date(row.updated_at as string),
-      ownerId: row.owner_id as number,
-    };
   }
 }
 
