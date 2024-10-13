@@ -1,8 +1,8 @@
 import * as log from "@std/log";
 import type { Context } from "@oak/oak/context";
 import { HTTP_401, HTTP_403 } from "../helpers/constants.ts";
-import { createService } from "../services/mod.ts";
 import type { Next } from "@oak/oak";
+import { createApiKeyService } from "../services/api_key.ts";
 
 export async function apiKeyProtect(ctx: Context, next: Next) {
   const authorization = ctx.request.headers.get("Authorization");
@@ -16,7 +16,7 @@ export async function apiKeyProtect(ctx: Context, next: Next) {
     return;
   }
 
-  const apiKeyService = createService("api_key");
+  const apiKeyService = createApiKeyService();
 
   const apiKey = apiKeyService.getApiKeyByValue(authorization);
 

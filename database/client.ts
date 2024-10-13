@@ -1,15 +1,19 @@
-import { Database } from "jsr:@db/sqlite";
+import { Database } from "@db/sqlite";
+import { Config } from "../config.ts";
 
-const DATABASE_FILE = "./data/app.db";
+const DATABASE_FOLDER = "./data";
 
-export class DbConn {
+export class DbClient {
   private static instance: null | Database = null;
 
   static getInstance(): Database {
-    if (DbConn.instance === null) {
-      DbConn.instance = new Database(new URL(DATABASE_FILE, import.meta.url));
+    if (DbClient.instance === null) {
+      const config = Config.getInstance();
+      const DATABASE_FILE = `${DATABASE_FOLDER}/${config.DATABASE_FILE}`;
+
+      DbClient.instance = new Database(new URL(DATABASE_FILE, import.meta.url));
     }
 
-    return DbConn.instance;
+    return DbClient.instance;
   }
 }

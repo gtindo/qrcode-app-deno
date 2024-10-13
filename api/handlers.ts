@@ -3,8 +3,8 @@ import { Context } from "@oak/oak";
 import { getStringSizeInBytes } from "../helpers/utils.ts";
 import { generateQrCode } from "../services/qr_code.ts";
 import { HTTP_200, HTTP_400, MAX_QR_CODE_SIZE } from "../helpers/constants.ts";
-import { createService } from "../services/mod.ts";
 import type { ApiKey } from "../database/types.ts";
+import { createApiKeyService } from "../services/api_key.ts";
 
 export function handleQrCodeGeneration(ctx: Context, content: string) {
   const apiKey = ctx.state.apiKey as ApiKey;
@@ -31,7 +31,7 @@ export function handleQrCodeGeneration(ctx: Context, content: string) {
   log.info("Qr code generated", { perf: { duration: perf.duration } });
 
   // Incrementing the usage of api key;
-  createService("api_key").incrementApiKeyUsage(apiKey.id);
+  createApiKeyService().incrementApiKeyUsage(apiKey.id);
 
   log.info(`Incrementing usage of api key ${apiKey.id}`);
 

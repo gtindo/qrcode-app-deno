@@ -1,7 +1,8 @@
-import type { Database } from "jsr:@db/sqlite";
+import type { Database } from "@db/sqlite";
 import type { ApiKey } from "../database/types.ts";
+import { DbClient } from "../database/client.ts";
 
-export class ApiKeyService {
+class ApiKeyService {
   constructor(private db: Database) {}
 
   getApiKeyByValue(value: string): ApiKey | undefined {
@@ -14,7 +15,7 @@ export class ApiKeyService {
 
     if (rows.length === 0) return undefined;
 
-    return this.rowToApiKey(rows[0]);
+    return this.toApiKey(rows[0]);
   }
 
   incrementApiKeyUsage(id: number) {
@@ -27,7 +28,7 @@ export class ApiKeyService {
     statement.run(id);
   }
 
-  private rowToApiKey(row: Record<string, unknown>): ApiKey {
+  private toApiKey(row: Record<string, unknown>): ApiKey {
     return {
       id: row.id as number,
       name: row.name as string,
@@ -41,3 +42,10 @@ export class ApiKeyService {
     };
   }
 }
+
+
+export function createApiKeyService() {
+  const db = DbClient.getInstance();
+  return new ApiKeyService(db);
+}
+

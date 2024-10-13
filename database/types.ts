@@ -23,3 +23,10 @@ export type ApiKey = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type AuthSession = {
+  id: string;
+  expiresAt: Date;
+  userId: number;
+  createdAt: Date;
+}
