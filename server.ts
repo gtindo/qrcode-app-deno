@@ -1,9 +1,6 @@
 import * as log from "@std/log"; 
-import { Application } from "jsr:@oak/oak/application";
-import apiRouter from "./api/routes.ts";
-import adminRouter from "./admin/routes.ts";
 
-
+// Setup Logging
 log.setup({
   handlers: {
     default: new log.ConsoleHandler("DEBUG", {
@@ -13,9 +10,18 @@ log.setup({
   }
 })
 
-const PORT = 8080;
-const app = new Application<{user: string}>();
+import { Application } from "jsr:@oak/oak/application";
 
+import { Config } from "./config.ts";
+import apiRouter from "./api/routes.ts";
+import adminRouter from "./admin/routes.ts";
+
+const PORT = 8080;
+const app = new Application();
+
+// Create config instance, and check if the config is right
+// If there is an issue it exit deno process
+Config.getInstance();
 
 app.use(apiRouter.routes());
 app.use(apiRouter.allowedMethods());
