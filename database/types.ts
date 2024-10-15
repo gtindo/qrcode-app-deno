@@ -29,4 +29,4 @@ export type AuthSession = {
   expiresAt: Date;
   userId: number;
   createdAt: Date;
-}
+};

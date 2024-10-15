@@ -2,8 +2,9 @@
   "tasks": {
     "dev": "deno run --watch --allow-read --allow-net --allow-env --allow-ffi --unstable-ffi server.ts",
     "fmt": "deno fmt */**/*.ts",
-    "generate:qr": "deno run --allow-read --allow-write scripts/gen_qr_codes.ts",
-    "generate:hash": "deno run --allow-read --allow-write scripts/gen_pwd_hash.ts",
+    "gen:qr": "deno run --allow-read --allow-write scripts/gen_qr_codes.ts",
+    "gen:hash": "deno run --allow-read --allow-write scripts/gen_pwd_hash.ts",
+    "gen:keys": "deno run scripts/gen_key_pair.ts",
     "del:sessions": "deno run --allow-env --allow-read --allow-ffi --unstable-ffi scripts/del_expired_sessions.ts"
   },
   "imports": {

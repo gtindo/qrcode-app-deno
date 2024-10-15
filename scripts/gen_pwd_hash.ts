@@ -1,4 +1,5 @@
-import { hashPassword, randomString } from "../helpers/utils.ts";
+import { hashPassword } from "../utils/security.ts";
+import { randomString } from "../utils/strings.ts";
 
 async function main() {
   const password = Deno.args[0];

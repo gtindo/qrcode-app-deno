@@ -1,6 +1,6 @@
 import * as log from "@std/log";
 import type { Context } from "@oak/oak/context";
-import { HTTP_401, HTTP_403 } from "../helpers/constants.ts";
+import { HTTP_401, HTTP_403 } from "../utils/constants.ts";
 import type { Next } from "@oak/oak";
 import { createApiKeyService } from "../services/api_key.ts";
 

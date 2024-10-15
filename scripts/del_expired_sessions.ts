@@ -1,7 +1,6 @@
 import * as log from "@std/log";
 import { createAuthSessionService } from "../services/auth_sessions.ts";
 
-
 function main() {
   const sessionsService = createAuthSessionService();
 
@@ -10,6 +9,5 @@ function main() {
 
   log.info(`${deletionCount} auth sessions deleted!`);
 }
-
 
 main();

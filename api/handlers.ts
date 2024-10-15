@@ -1,8 +1,8 @@
 import * as log from "@std/log";
 import { Context } from "@oak/oak";
-import { getStringSizeInBytes } from "../helpers/utils.ts";
+import { getStringSizeInBytes } from "../utils/strings.ts";
 import { generateQrCode } from "../services/qr_code.ts";
-import { HTTP_200, HTTP_400, MAX_QR_CODE_SIZE } from "../helpers/constants.ts";
+import { HTTP_200, HTTP_400, MAX_QR_CODE_SIZE } from "../utils/constants.ts";
 import type { ApiKey } from "../database/types.ts";
 import { createApiKeyService } from "../services/api_key.ts";
 

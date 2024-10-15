@@ -2,9 +2,8 @@ import type { Database } from "@db/sqlite";
 import { DbClient } from "../database/client.ts";
 import { toUser } from "../database/fmt.ts";
 
-
 class UserService {
-  constructor(private db: Database){}
+  constructor(private db: Database) {}
 
   getById(id: number) {
     const statement = this.db.prepare(`
@@ -14,8 +13,8 @@ class UserService {
     `);
 
     const rows = statement.all(id);
-    if(rows.length === 0) return undefined;
-    
+    if (rows.length === 0) return undefined;
+
     return toUser(rows[0]);
   }
 
@@ -28,7 +27,7 @@ class UserService {
 
     const rows = statement.all(username);
 
-    if(rows.length === 0) return undefined;
+    if (rows.length === 0) return undefined;
     return toUser(rows[0]);
   }
 }

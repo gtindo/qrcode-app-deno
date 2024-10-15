@@ -30,9 +30,7 @@ class ApiKeyService {
   }
 }
 
-
 export function createApiKeyService() {
   const db = DbClient.getInstance();
   return new ApiKeyService(db);
 }
-
