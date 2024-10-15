@@ -7,3 +7,5 @@ export const HTTP_500 = 500;
 
 export const MAX_QR_CODE_SIZE = 7089;
 
+export const SESSION_ID_COOKIE_NAME = "session-id";
+
