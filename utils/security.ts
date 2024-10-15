@@ -89,7 +89,7 @@ export function decodeCsrfToken(token: string) {
     data: data.slice(0, 4).join("_"),
     userId: parseInt(data[0]),
     sessionId: data[1],
-    expiresAt: data[3],
+    expiresAt: parseInt(data[3]),
     signature: data[4],
   };
 }
