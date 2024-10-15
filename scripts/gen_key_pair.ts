@@ -1,6 +1,5 @@
 import { generateKeyPair } from "../utils/security.ts";
 
-
 function main() {
   const { publicKey, privateKey } = generateKeyPair();
 

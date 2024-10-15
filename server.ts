@@ -16,6 +16,7 @@ import { Config } from "./config.ts";
 import apiRouter from "./api/routes.ts";
 import adminRouter from "./admin/routes.ts";
 
+
 const PORT = 8080;
 const app = new Application();
 
