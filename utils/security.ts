@@ -23,7 +23,7 @@ export async function hashPassword(
 export function signString(data: string, privateKey: string): Promise<string> {
   return new Promise((resolve, reject) => {
     // using a callback enable the usage of libuv thread pool
-    sign("SHA256", Buffer.from(data), privateKey,(err, data) => {
+    sign("SHA256", Buffer.from(data), privateKey, (err, data) => {
       if (err) {
         reject(err);
       } else {
@@ -56,7 +56,11 @@ export function verifySignature(
   });
 }
 
-export async function createCsrfToken(userId: number, sessionId: string, privateKey: string) {
+export async function createCsrfToken(
+  userId: number,
+  sessionId: string,
+  privateKey: string,
+) {
   const nonce = randomString(8);
 
   const tenMinutesInMs = 1000 * 60 * 60; // 1000ms * 60s * 10mn
@@ -66,7 +70,7 @@ export async function createCsrfToken(userId: number, sessionId: string, private
   const signature = await signString(tokenData, privateKey);
 
   const token = base64.encodeBase64(Buffer.from(`${tokenData}_${signature}`));
-  
+
   return token;
 }
 
@@ -76,18 +80,18 @@ export function decodeCsrfToken(token: string) {
   const data = decodedB64.split("_");
 
   // The decoded token is not processable
-  if(data.length < 5) {
-    log.warn(`Csrf Token ${token} is not processable`)
+  if (data.length < 5) {
+    log.warn(`Csrf Token ${token} is not processable`);
     return undefined;
   }
-  
+
   return {
     data: data.slice(0, 4).join("_"),
     userId: parseInt(data[0]),
     sessionId: data[1],
     expiresAt: data[3],
-    signature: data[4]
-  }
+    signature: data[4],
+  };
 }
 
 export function generateKeyPair() {
