@@ -25,11 +25,11 @@ class AuthSessionService {
    */
   deleteAllExpired() {
     const statement = this.db.prepare(`
-      DELETE auth_sessions
+      DELETE FROM auth_sessions
       WHERE expires_at <= datetime(?, 'auto')
     `);
 
-    return statement.run(Date.now());
+    return statement.run();
   }
 }
 
